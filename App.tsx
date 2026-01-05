@@ -7,7 +7,8 @@ import VariationLight from './components/VariationLight';
 import VariationHighUrgency from './components/VariationHighUrgency';
 
 const App: React.FC = () => {
-  const [currentVariation, setCurrentVariation] = useState<Variation>(Variation.DARK_MODERN);
+  // Alterado para iniciar na variação de Urgência conforme solicitado
+  const [currentVariation, setCurrentVariation] = useState<Variation>(Variation.HIGH_URGENCY);
 
   const renderVariation = () => {
     switch (currentVariation) {
@@ -18,13 +19,13 @@ const App: React.FC = () => {
       case Variation.HIGH_URGENCY:
         return <VariationHighUrgency data={COMMON_DATA} />;
       default:
-        return <VariationDark data={COMMON_DATA} />;
+        return <VariationHighUrgency data={COMMON_DATA} />;
     }
   };
 
   return (
     <div className="relative">
-      {/* Floating Variation Switcher - For Demo Purposes */}
+      {/* Seletor de Variações para Teste */}
       <div className="fixed bottom-4 left-4 z-50 flex gap-2 bg-white/10 backdrop-blur-md p-2 rounded-2xl border border-white/20 shadow-2xl scale-75 md:scale-100 origin-bottom-left">
         <button 
           onClick={() => setCurrentVariation(Variation.DARK_MODERN)}
@@ -52,7 +53,7 @@ const App: React.FC = () => {
         </button>
       </div>
 
-      {/* Variation Content */}
+      {/* Conteúdo da Variação */}
       {renderVariation()}
     </div>
   );

@@ -3,7 +3,7 @@ import { PageData } from './types';
 
 export const COMMON_DATA: PageData = {
   title: "⚠️ ESPERA! Não Saia Ainda...",
-  subtitle: "Esta é sua última chance de garantir com 67% DE DESCONTO",
+  subtitle: "Esta é sua última chance de garantir com 50% DE DESCONTO",
   oldPrice: "R$97,00",
   newPrice: "R$49",
   ctaText: "SIM, QUERO MEU DESCONTO AGORA",
