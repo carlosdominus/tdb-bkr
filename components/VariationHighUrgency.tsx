@@ -11,10 +11,35 @@ const VariationHighUrgency: React.FC<Props> = ({ data }) => {
   const [timeLeft, setTimeLeft] = useState(450); // 7:30 conforme imagem
 
   useEffect(() => {
+    // Timer
     const timer = setInterval(() => {
       setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));
     }, 1000);
-    return () => clearInterval(timer);
+
+    // Bloqueio de clique direito
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // Bloqueio de atalhos de teclado (Ctrl+C, Ctrl+U, F12, etc)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p' || e.key === 'a')) ||
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const formatTime = (seconds: number) => {
@@ -24,11 +49,11 @@ const VariationHighUrgency: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-red-600 selection:text-white pb-10">
+    <div className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-none pb-10">
       {/* Banner de Urgência no Topo - Mais fino para economizar espaço */}
       <div className="bg-red-600 py-2 px-4 text-center sticky top-0 z-40 shadow-lg border-b border-red-700">
         <p className="text-[10px] md:text-xs font-black tracking-widest uppercase text-white flex items-center justify-center gap-2">
-          <span>🚨</span> OFERTA DE CONTINGÊNCIA - ÚLTIMA CHANCE <span>🚨</span>
+          <span>🚨</span> OFERTA DE 50% OFF - ÚLTIMA CHANCE <span>🚨</span>
         </p>
       </div>
 
